@@ -30,7 +30,7 @@ class RecipeDetailRepositoryImpl @Inject constructor(
                     emit(Resource.Loading(false))
                 }
             } catch (e: Exception) {
-                emit(Resource.Error(e.localizedMessage))
+                emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred!"))
                 emit(Resource.Loading(false))
             }
         }
