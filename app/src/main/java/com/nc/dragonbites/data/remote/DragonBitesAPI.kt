@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface DragonBitesAPI {
 
-    @GET
+    @GET("/")
     suspend fun getRecipes(): List<Recipe>
 
     @GET("{id}")

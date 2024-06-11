@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.nc.dragonbites.data.local.RecipesDatabase
+import com.nc.dragonbites.data.local.converters.IngredientsConverter
+import com.nc.dragonbites.data.local.converters.MethodConverter
 import com.nc.dragonbites.data.remote.DragonBitesAPI
 import dagger.Module
 import dagger.Provides
@@ -51,17 +53,21 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesRecipesDatabase(app: Application): RecipesDatabase {
-        return Room.databaseBuilder(app, RecipesDatabase::class.java,
-            "recipes_database.db")
-            .fallbackToDestructiveMigration()
-            .build()
+    fun providesGson(): Gson {
+        return GsonBuilder().create()
     }
 
     @Singleton
     @Provides
-    fun providesGson(): Gson {
-        return GsonBuilder().create()
+    fun providesRecipesDatabase(app: Application, gson: Gson): RecipesDatabase {
+        return Room.databaseBuilder(app, RecipesDatabase::class.java,
+            "recipes_database.db")
+            .addTypeConverter(IngredientsConverter(gson))
+            .addTypeConverter(MethodConverter(gson))
+            .fallbackToDestructiveMigration()
+            .build()
     }
+
+
 
 }

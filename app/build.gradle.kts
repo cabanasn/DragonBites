@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
 
     // Room
     implementation(libs.room.ktx)
@@ -70,6 +71,8 @@ dependencies {
     // Dagger - Hilt
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
 
     // Retrofit
     implementation(libs.retrofit)
